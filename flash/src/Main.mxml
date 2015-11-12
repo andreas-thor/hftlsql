@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<mx:Application 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:local="*" 
+	layout="absolute"
+	applicationComplete="initapp(event)">
+
+
+	<mx:Script source="Main.as" />
+	
+	<!-- client to ILIAS SOAS server -->
+	
+	<mx:WebService
+		id = "ILIASServer"
+		wsdl = "https://ilias.hft-leipzig.de/ilias/webservice/soap/server.php?wsdl"
+		useProxy = "false"
+		showBusyCursor="true"
+		fault = "ILIAS_fault(event)">
+		
+			<mx:operation 
+				name="getQuestionSolution" 
+                result="ILIAS_getPreviousSolution(event)"/>
+
+			<mx:operation 
+				name="saveQuestion" 
+                result="ILIAS_result(event)"/>
+
+	</mx:WebService>
+		
+		
+
+	<!-- GUI elements -->	
+	
+	<mx:TextArea
+		id="questiontext"
+		text=""
+		wordWrap="true"
+		editable="false"
+		contentBackgroundColor = "0xF0F7FE"
+		width="540"
+		height="100"
+		x = "20"
+		y = "20">
+	</mx:TextArea>
+	
+	<mx:TextArea
+		id="queryinput"
+		visible = "true"
+		text=""
+		editable="true"
+		wordWrap="true"
+		width="540"
+		height="200"
+		x = "20"
+		y = "140">
+	</mx:TextArea>
+	
+	<mx:ArrayCollection id="arrCollHeader">
+        <mx:source>
+            <mx:Array>
+                <mx:Object A="" B="" C="" D="" E="" F="" />
+            </mx:Array>
+        </mx:source>
+    </mx:ArrayCollection>
+	
+	<mx:DataGrid  
+		id = "tableheader" 
+		visible = "false"
+		dataProvider="{arrCollHeader}"
+		editable="true"
+		showHeaders = "false"
+		rowCount = "1"
+		rowHeight = "25"
+		width="540" 
+		height="25"
+		x = "20"
+		y = "110">
+		<mx:columns>
+			<mx:DataGridColumn dataField="A" editable="true"  />
+			<mx:DataGridColumn dataField="B" editable="true" />
+			<mx:DataGridColumn dataField="C" editable="true" />
+			<mx:DataGridColumn dataField="D" editable="true" />
+			<mx:DataGridColumn dataField="E" editable="true" />
+			<mx:DataGridColumn dataField="F" editable="true" />
+        </mx:columns>
+	</mx:DataGrid>
+	
+	<mx:ArrayCollection id="arrColl">
+        <mx:source>
+            <mx:Array>
+                <mx:Object A="" B="" C="" D="" E="" F="" />
+                <mx:Object A="" B="" C="" D="" E="" F="" />
+                <mx:Object A="" B="" C="" D="" E="" F="" />
+                <mx:Object A="" B="" C="" D="" E="" F="" />
+                <mx:Object A="" B="" C="" D="" E="" F="" />
+                <mx:Object A="" B="" C="" D="" E="" F="" />
+                <mx:Object A="" B="" C="" D="" E="" F="" />
+                <mx:Object A="" B="" C="" D="" E="" F="" />
+            </mx:Array>
+        </mx:source>
+    </mx:ArrayCollection>
+	
+	<mx:DataGrid  
+		id = "tablebody" 
+		visible = "false"
+		dataProvider="{arrColl}"
+		editable="true"
+		showHeaders = "false"
+		rowCount = "8"
+		rowHeight = "25"
+		width="540" 
+		height="210"
+		x = "20"
+		y = "135">
+		<mx:columns>
+			<mx:DataGridColumn dataField="A" editable="true"  />
+			<mx:DataGridColumn dataField="B" editable="true" />
+			<mx:DataGridColumn dataField="C" editable="true" />
+			<mx:DataGridColumn dataField="D" editable="true" />
+			<mx:DataGridColumn dataField="E" editable="true" />
+			<mx:DataGridColumn dataField="F" editable="true" />
+        </mx:columns>
+	</mx:DataGrid>
+			
+	<mx:Button
+		label = "Submit"
+		click = "submit()"
+		width="100"
+		height="20"
+		x = "250"
+		y = "360">
+	</mx:Button>
+	
+	<mx:Image 
+	    id = "icon_not_ok"
+		x = "380"
+		y = "360"
+		visible = "false"
+		source="@Embed('assets/icon_not_ok.png')"/>
+
+	<mx:Image 
+	    id = "icon_ok"
+		x = "380"
+		y = "360"
+		visible = "false"
+		source="@Embed('assets/icon_ok.png')"/>
+	
+	<mx:Image 
+	    id = "icon_wait"
+		x = "380"
+		y = "360"
+		visible = "false"
+		source="@Embed('assets/icon_wait.gif')"/>
+		
+	<mx:TextArea
+		id="statusfield"
+		text=""
+		editable="false"
+		wordWrap="true"
+		contentBackgroundColor = "0xF8FFA0"
+		width="540"
+		height="80"
+		x = "20"
+		y = "400">
+	</mx:TextArea>	
+	
+</mx:Application>	
+
+

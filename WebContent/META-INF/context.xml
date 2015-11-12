@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <!-- Specify a JDBC datasource -->
+    <Resource name="jdbc/testdb" auth="Container"
+        type="javax.sql.DataSource" username="sa" password=""
+        driverClassName="org.h2.Driver"
+        url="jdbc:h2:/home/thor/webapps/HFTLSQL/iliasdb;MODE=DB2"
+        maxActive="100" maxIdle="4" />
+ 
+</Context>
+<!--          url="jdbc:h2:/home/thor/webapps/HFTLSQL/test;AUTO_SERVER=TRUE" -->
+<!--          url="jdbc:h2:~/test;AUTO_SERVER=TRUE" -->
