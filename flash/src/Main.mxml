@@ -10,10 +10,11 @@
 	<mx:Script source="Main.as" />
 	
 	<!-- client to ILIAS SOAS server -->
+	<!--	wsdl = "https://ilias.hft-leipzig.de/ilias/webservice/soap/server.php?wsdl" -->
 	
 	<mx:WebService
 		id = "ILIASServer"
-		wsdl = "https://ilias.hft-leipzig.de/ilias/webservice/soap/server.php?wsdl"
+		wsdl = "http://ilias5-test.hft-leipzig.de/webservice/soap/server.php?wsdl"
 		useProxy = "false"
 		showBusyCursor="true"
 		fault = "ILIAS_fault(event)">

@@ -68,7 +68,6 @@ public function initapp(event:FlexEvent):void
 	   //queryinput.text += "active_id = " + active_id + "\n";
 	   //queryinput.text += "question_id = " + question_id + "\n";
 	
-	
 	getTaskInfo();
 	ILIASServer.getQuestionSolution(session_id + "::" + client, active_id, question_id, pass);
 }
@@ -188,26 +187,24 @@ public function getTaskInfo():void
 protected function ILIAS_getPreviousSolution(event:ResultEvent):void
 {
 
-	queryinput.text = "\nILIAS_getPreviousSolution";
-	
 	if (event.result.length == 0) return;
-	queryinput.text += "\nLength: " + event.result.length;
 	
 	// show previous sql query
 	if (tasktype == "sql") {
-		queryinput.text += "\nSQL: " + event.result[0];
+		queryinput.text += event.result[0];
 	} 
 
 	// fill data table (deserialize from string); result is stored in csv format (lines separated by \n, fields separated by \t)
 	if ((tasktype == "result") || (tasktype == "header")) {
 		
 		var rows:Array = event.result[0].split("\n");
-
+		var o:Object;
+		
 		// Header
 		if (rows.length>0) {
 			var t:ArrayCollection = arrCollHeader;
 			var row:Array = rows[0].split("\t");
-			var o:Object = t.getItemAt(0);
+			o  = t.getItemAt(0);
 			o.A = StringUtil.trim (row[0]);
 			o.B = StringUtil.trim (row[1]);
 			o.C = StringUtil.trim (row[2]);
@@ -221,7 +218,7 @@ protected function ILIAS_getPreviousSolution(event:ResultEvent):void
 		t = arrColl;
 		for (var i:int = 1; i < rows.length; i++) {
 			row = rows[i].split("\t");
-			var o:Object = t.getItemAt(i-1);
+			o = t.getItemAt(i-1);
 			o.A = StringUtil.trim (row[0]);
 			o.B = StringUtil.trim (row[1]);
 			o.C = StringUtil.trim (row[2]);
