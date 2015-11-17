@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<mx:Application 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:s="library://ns.adobe.com/flex/spark"
+	xmlns:local="*" 
+	layout="absolute"
+	applicationComplete="initapp(event)">
+
+
+	<mx:Script source="Main.as" />
+	
+	<!-- client to ILIAS SOAS server -->
+	<mx:WebService
+		id = "ILIASServer"
+		wsdl = "https://ilias.hft-leipzig.de/ilias/webservice/soap/server.php?wsdl"
+		
+		useProxy = "false"
+		showBusyCursor="true"
+		fault = "ILIAS_fault(event)">
+		
+			<mx:operation 
+				name="getQuestionSolution" 
+                result="ILIAS_getPreviousSolution(event)"/>
+
+			<mx:operation 
+				name="saveQuestion" 
+                result="ILIAS_result(event)"/>
+
+	</mx:WebService>
+		
+		
+
+	<!-- GUI elements -->	
+	
+	<mx:TextArea
+		id="questiontext"
+		text=""
+		wordWrap="true"
+		editable="false"
+		contentBackgroundColor = "0xF0F7FE"
+		width="540"
+		height="150"
+		x = "20"
+		y = "20">
+	</mx:TextArea>
+	
+	<mx:TextArea
+		id="queryinput"
+		visible = "true"
+		text=""
+		editable="true"
+		wordWrap="true"
+		width="540"
+		height="150"
+		x = "20"
+		y = "190">
+	</mx:TextArea>
+	
+	<mx:Button
+		label = "Submit"
+		click = "submit()"
+		width="100"
+		height="20"
+		x = "250"
+		y = "360">
+	</mx:Button>
+		
+	<mx:TextArea
+		id="statusfield"
+		text=""
+		editable="false"
+		wordWrap="true"
+		contentBackgroundColor = "0xF8FFA0"
+		width="540"
+		height="80"
+		x = "20"
+		y = "400">
+	</mx:TextArea>	
+	
+</mx:Application>	
+
+
