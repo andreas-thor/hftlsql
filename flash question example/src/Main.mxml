@@ -7,13 +7,12 @@
 	applicationComplete="initapp(event)">
 
 
+	<!-- script -->
 	<mx:Script source="Main.as" />
-	
+
 	<!-- client to ILIAS SOAS server -->
 	<mx:WebService
 		id = "ILIASServer"
-		wsdl = "https://ilias.hft-leipzig.de/ilias/webservice/soap/server.php?wsdl"
-		
 		useProxy = "false"
 		showBusyCursor="true"
 		fault = "ILIAS_fault(event)">
@@ -31,7 +30,6 @@
 		
 
 	<!-- GUI elements -->	
-	
 	<mx:TextArea
 		id="questiontext"
 		text=""

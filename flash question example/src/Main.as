@@ -35,18 +35,20 @@ public function initapp(event:FlexEvent):void
 	question_id = params["question_id"];
 	points_max = params["points_max"];
 	
-	// load user defined parameters from ILIAS */
-	intro = params["intro"];		// example ILIAS parameter intro
+	// load user defined parameters from ILIAS 
+	intro = params["intro"];		// example ILIAS parameter intro (must be defined in the question settings)
 
 	questiontext.text = "session_id = " + session_id + "\n";
 	questiontext.text += "client = " + client + "\n";
 	questiontext.text += "points_max = " + points_max + "\n";
-	//questiontext.text += "server = " + server + "\n";
+	questiontext.text += "server = " + server + "\n";
 	questiontext.text += "pass = " + pass + "\n";
 	questiontext.text += "active_id = " + active_id + "\n";
 	questiontext.text += "question_id = " + question_id + "\n";
 	questiontext.text += "intro = " + intro;
 	
+	ILIASServer.wsdl = server;
+	ILIASServer.loadWSDL();
 	ILIASServer.getQuestionSolution(session_id + "::" + client, active_id, question_id, pass);
 }
 
